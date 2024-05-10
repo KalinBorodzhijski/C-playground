@@ -11,7 +11,6 @@
  * - clearBit: Clears a specific bit.
  * - toggleBit: Toggles a specific bit.
  * - setbits: Sets bits from one number into another at a specified position.
- * - rightrot: Rotates the bits of a number to the right.
  * - isEven: Checks if a number is even using bitwise operations.
  * - swap: Swaps two numbers using bitwise operations.
  * - countSetBits: Counts the number of set bits in an integer.
@@ -25,6 +24,7 @@
 
 #include <stdio.h>
 #include <assert.h>
+#include <stdbool.h>
 
 #define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c"
 #define BYTE_TO_BINARY(byte)  \
@@ -44,7 +44,13 @@
 int setBit(int num, int position);
 int clearBit(int num, int position);
 int toggleBit(int num, int position);
-
 int setBits(int dest, int startPosition, int numberOfBits, int source);
+bool isEven(int number);
+void swap(int * a, int * b);
+int countSetBits(int number);
+int reverseBits(unsigned int number);
+int findMissing(int * numbers, int size);
+bool isPowerOfTwo(int number);
+int findSingle(int * numbers, int size);
 
 #endif //MAIN_H
