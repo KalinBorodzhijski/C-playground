@@ -35,6 +35,7 @@ int main(int argc, char** argv)
     {
         printf("Directory Path '%s':\n", filePaths[i]);
         handleFolder(filePaths[i], flags);
+        free(filePaths[i]);
     }
 
     return 0;
