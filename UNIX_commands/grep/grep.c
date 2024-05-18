@@ -63,37 +63,20 @@ void handleFile(char* filename, unsigned int options, char * pattern, bool print
     while (fgets(currentLine, MAX_LINE_LEN,currentFile))
     {
         lineCount++;
-        lineToSearch = currentLine;
+        lineToSearch = strdup(currentLine);
 
         if (options & OPTION_IGNORE_CASE) 
         {
             toLowercase(lineToSearch);
         }
-
-        if (strstr(lineToSearch, patternToSearch) != NULL) 
-        {            
-            if (!(options & OPTION_INVERT_MATCH)) 
-            { // Normal match
-                if (!(options & OPTION_COUNT_LINES))
-                {
-                    if ((!(options & OPTION_COUNT_LINES)) && (printFileName == true))
-                    {
-                        printf("%s:", filename);
-                    }
-                    if (options & OPTION_LINE_NUMBER) 
-                    {
-                        printf("%d:", lineCount);
-                    }
-                    printf("%s", currentLine);
-                }
-                matchCount++;
-            }
-        } 
-        else if (options & OPTION_INVERT_MATCH) 
-        { // Inverted match
+        
+        char* result = strstr(lineToSearch, patternToSearch);
+        if (((result != NULL) && (!(options & OPTION_INVERT_MATCH))) ||
+            (result == NULL) && ((options & OPTION_INVERT_MATCH))) 
+        {
             if (!(options & OPTION_COUNT_LINES))
             {
-                if ((!(options & OPTION_COUNT_LINES)) && (printFileName == true))
+                if (printFileName == true)
                 {
                     printf("%s:", filename);
                 }
@@ -105,9 +88,15 @@ void handleFile(char* filename, unsigned int options, char * pattern, bool print
             }
             matchCount++;
         }
+
+        free(lineToSearch);
     }
 
     if (options & OPTION_COUNT_LINES) {
+        if (printFileName == true)
+        {
+            printf("%s:", filename);
+        }
         printf("Count: %d\n", matchCount);
     }
     
