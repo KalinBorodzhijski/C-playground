@@ -121,10 +121,10 @@ void forEach(DynamicArray* da, void (*func)(int*)) {
     if (!da || !func) {
         return;
     }
-
+    
     for (size_t i = 0; i < da->size; i++)
     {
-        func((int*)da->array[i]);
+        func((int*)da->array + i);
     }
 }
 //----------------------------------------------------------------------------------
