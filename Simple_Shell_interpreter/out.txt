@@ -1,0 +1,12 @@
+Makefile
+command.c
+command.h
+command.o
+out.txt
+output.txt
+shell
+shell.c
+shell.o
+utils.c
+utils.h
+utils.o
